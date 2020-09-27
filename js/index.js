@@ -1,11 +1,14 @@
 const app = document.getElementById("app");
 
-const listData = ["l1", "l2"];
+const listData = [];
 
 const listWrapper = document.createElement("div");
+const addBtn = document.createElement("button");
+addBtn.innerHTML = "add new todo";
 const orderList = document.createElement("ol");
 
 const printData = () => {
+  console.log(listData);
   for (let i = 0; i < listData.length; i++) {
     addData(listData[i]);
   }
@@ -14,26 +17,22 @@ const printData = () => {
 const addData = (listText) => {
   const list = document.createElement("li");
   list.appendChild(document.createTextNode(listText));
-  listWrapper.append(list);
+  orderList.append(list);
+};
+
+const clearUI = () => {
+  orderList.innerHTML = "";
+};
+
+addBtn.onclick = () => {
+  const userData = "data by user";
+  clearUI();
+  listData.push(userData);
+  printData();
 };
 
 printData();
 
+listWrapper.append(orderList);
 app.append(listWrapper);
-
-// const app = document.getElementById("app");
-
-// const listData = ["l1", "l2"];
-
-// const orderList = document.createElement("ol");
-
-// const listWrapper = document.createElement("div");
-
-// for (let i = 0; i < listData.length; i++) {
-//   if (listData[i] !== undefined) {
-//     const list1 = document.createElement("li");
-//     list1.appendChild(document.createTextNode(listData[i]));
-//     listWrapper.append(list1);
-//   }
-// }
-// app.append(listWrapper);
+app.append(addBtn);
