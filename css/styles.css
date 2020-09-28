@@ -4,12 +4,14 @@
   border: 10px;
 }
 
-.modal {
-  height: 100%;
-  width: 100%;
+.close {
+  position: relative;
+  left: 100px;
+  top: 0;
+  padding: 1px 1px 1px 1px;
 }
 
-.application {
-  height: 100%;
-  width: 100%;
+.close:hover {
+  background-color:red;
+  color: white;
 }
