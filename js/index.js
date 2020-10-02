@@ -1,61 +1,114 @@
 const app = document.getElementById("app");
  
-const listData = [];
+const taskTitles = [];
+const taskDescripts = [];
 
 const listWrapper = document.createElement("div");
+listWrapper.id = "myModal";
+listWrapper.className = "modal";
+
+const divison = document.createElement("div");
+
+const div1 = document.createElement("div");
+div1.className = "modal-content";
 
 const addBtn = document.createElement("button");
 addBtn.innerHTML = "add new todo";
 
+const addModalBtn = document.createElement("button");
+addModalBtn.innerHTML = "Add New Task";
+
 const orderList = document.createElement("ol");
 
-var input = document.createElement("input");
-input.setAttribute('type', 'text');
+const span = document.createElement("span");
+span.className = "close";
+span.appendChild(document.createTextNode("x"));
+div1.appendChild(span);
+
+var titleInput = document.createElement("input");
+titleInput.setAttribute('type', 'text');
+
+var taskInput = document.createElement("input");
+taskInput.setAttribute('type', 'text');
+
+const p1 = document.createElement("p");
+p1.appendChild(document.createTextNode("Title task :"));
+p1.appendChild(titleInput);
+const p2 = document.createElement("p");
+p2.appendChild(document.createTextNode("Task description:"));
+p2.appendChild(taskInput);
+const p3 = document.createElement("p");
+p3.appendChild(addModalBtn);
+
+div1.appendChild(p1);
+div1.appendChild(p2);
+div1.appendChild(p3)
+listWrapper.append(div1);
+
+addBtn.onclick = () =>{
+  var modal = document.getElementById("myModal");
+  var span = document.getElementsByClassName("close")[0];
+  modal.style.display = "block";
+}
 
 const printData = () => {
-  for (let i = 0; i < listData.length; i++) {
+  for (let i = 0; i < taskTitles.length; i++) {
     const list = document.createElement("li");
-    list.appendChild(document.createTextNode(listData[i]));
-    listWrapper.appendChild(list);
+    list.appendChild(document.createTextNode(taskTitles[i]));
+    divison.appendChild(list);
   }
 };
 
-var close = document.getElementsByClassName("close");
+var closing = document.getElementsByClassName("closing");
 for (let i = 0; i < close.length; i++) {
-  close[i].onclick = function() {
+  closing[i].onclick = function() {
     var div = this.parentElement;
     div.style.display = "none";
   }
 }
 
-addBtn.onclick = () => {
+addModalBtn.onclick = () => {
   const list = document.createElement("li");
-  const userData = input.value;
-  if(userData === ''){
+  const taskTitle = titleInput.value;
+  const taskDescript = taskInput.value;
+  if(taskTitle === '' || taskDescript === ''){
     alert("You must write something!");
   }
   else{
-    list.appendChild(document.createTextNode(userData));
-    listData.push(userData);
-    listWrapper.appendChild(list); 
+   list.appendChild(document.createTextNode(taskTitle));
+   list.appendChild(document.createTextNode(" : "))
+   list.appendChild(document.createTextNode(taskDescript))
+    taskTitles.push(taskTitle);
+    taskDescripts.push(taskDescript);
+    divison.appendChild(list);
+    divison.appendChild(list);
+    divison.appendChild(list); 
   }
   var span = document.createElement("SPAN");
   var txt = document.createTextNode("Delete");
-  span.className = "close";
+  span.className = "closing";
   span.appendChild(txt);
   list.appendChild(span);
 
-  for (let i = 0; i < close.length; i++) {
-    close[i].onclick = function() {
+  for (let i = 0; i < closing.length; i++) {
+    closing[i].onclick = function() {
       var div = this.parentElement;
       div.style.display = "none";
     }
   }
 };
 
-printData();
+
+span.onclick = () =>{
+  var modal = document.getElementById("myModal");
+  modal.style.display = "none";
+}
+
 
 //listWrapper.append(orderList);
-app.append("Enter task:", input);
+//app.append("Enter task:", input);
+
+divison.append(":) Title :  Description");
 app.append(listWrapper);
+app.append(divison);
 app.append(addBtn);
