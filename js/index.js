@@ -31,19 +31,41 @@ titleInput.setAttribute('type', 'text');
 var taskInput = document.createElement("input");
 taskInput.setAttribute('type', 'text');
 
-const p1 = document.createElement("p");
-p1.appendChild(document.createTextNode("Title task :"));
-p1.appendChild(titleInput);
-const p2 = document.createElement("p");
-p2.appendChild(document.createTextNode("Task description:"));
-p2.appendChild(taskInput);
-const p3 = document.createElement("p");
-p3.appendChild(addModalBtn);
+// const p1 = document.createElement("p");
+// p1.appendChild(document.createTextNode("Title task :"));
+// p1.appendChild(titleInput);
+// const p2 = document.createElement("p");
+// p2.appendChild(document.createTextNode("Task description:"));
+// p2.appendChild(taskInput);
+// const p3 = document.createElement("p");
+// p3.appendChild(addModalBtn);
 
-div1.appendChild(p1);
-div1.appendChild(p2);
-div1.appendChild(p3)
-listWrapper.append(div1);
+
+const table = document.createElement("table");
+const tr1 = document.createElement("tr");
+const td1 = document.createElement("td");
+const tr2 = document.createElement("tr");
+const td2 = document.createElement("td");
+const tr3 = document.createElement("tr");
+//const td = document.createElement("td");
+td1.appendChild(document.createTextNode("Title task :"));
+td1.appendChild(titleInput);
+td2.appendChild(document.createTextNode("Task description:"));
+td2.appendChild(taskInput);
+tr3.appendChild(addModalBtn);
+
+// div1.appendChild(p1);
+// div1.appendChild(p2);
+// div1.appendChild(p3)
+// listWrapper.append(div1);
+
+tr1.appendChild(td1);
+tr2.appendChild(td2);
+table.appendChild(tr1);
+table.appendChild(tr2);
+table.appendChild(tr3);
+div1.append(table);
+listWrapper.append(div1); 
 
 addBtn.onclick = () =>{
   var modal = document.getElementById("myModal");
