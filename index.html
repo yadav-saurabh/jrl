@@ -1,14 +1,32 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TODO</title>
-    <link rel="stylesheet" href="css/styles.css" />
-  </head>
-  <body>
-    <div id="app"></div>
 
-    <script src="js/index.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TODO</title>
+  <link rel="stylesheet" href="css/styles.css" />
+  <script src="js/index.js" defer></script>
+</head>
+
+<body>
+  <!-- Trigger/Open The Modal -->
+  <button id="myBtn">Add New Todo</button>
+  <!-- The Modal -->
+  <div id="myModal" class="modal">
+    <!-- Modal content -->
+    <div class="modal-content">
+      <span class="close">&times;</span>
+      <label><b>Title</b></label>
+      <input type="text" placeholder="Enter title" name="title" />
+      <label><b>Description</b></label>
+      <input type="text" placeholder="Enter Description" name="desc" />
+      <button type="submit" class="btn btn--success" id="addBtn">Add Todo</button>
+    </div>
+  </div>
+  <div>
+    <ol id="todo-list"> </ol>
+  </div>
+</body>
+
 </html>

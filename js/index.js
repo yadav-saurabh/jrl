@@ -1,38 +1,96 @@
-const app = document.getElementById("app");
 
-const listData = [];
+const addTodoModal = document.getElementById('myModal');
+const userInputs = addTodoModal.querySelectorAll('input');
+const toDoListItems = [];
 
-const listWrapper = document.createElement("div");
-const addBtn = document.createElement("button");
-addBtn.innerHTML = "add new todo";
-const orderList = document.createElement("ol");
+let modal = document.getElementById('myModal');
+let btn = document.getElementById('myBtn');
+let span = document.getElementsByClassName('close')[0];
 
-const printData = () => {
-  console.log(listData);
-  for (let i = 0; i < listData.length; i++) {
-    addData(listData[i]);
+btn.onclick = function () {
+  modal.style.display = 'block';
+};
+
+span.onclick = function () {
+  modal.style.display = 'none';
+};
+
+window.onclick = function (event) {
+  if (event.target == modal) {
+    modal.style.display = 'none';
   }
 };
 
-const addData = (listText) => {
-  const list = document.createElement("li");
-  list.appendChild(document.createTextNode(listText));
-  orderList.append(list);
+const renderNewModalEl = (id, title, desc) => {
+  const ol = document.getElementById('todo-list');
+  const newModalEl = document.createElement('li');
+  newModalEl.textContent = ` Title : ${title}    Desc : ${desc}`;
+  ol.append(newModalEl);
+
+  const button = document.createElement('button');
+  button.innerHTML = 'Delete ToDo';
+  button.setAttribute('class', 'delBtn--danger');
+  ol.append(button);
+
+  /* action to perform when clicked on delete todo */
+  button.addEventListener(
+    'click',
+    (deleteListHandle = () => {
+      let arrayId;
+      toDoListItems.map(function (el) {
+        arrayId = el.id;
+        if (id === arrayId) {
+          removeByAttr(toDoListItems, 'id', id);
+        }
+      });
+      ol.removeChild(newModalEl);
+      ol.removeChild(button);
+      // console.log(toDoListItems);
+    })
+  );
+  /* function to remove elements from array object */
+  let removeByAttr = function (toDoListItems, attr, value) {
+    let i = toDoListItems.length;
+    while (i--) {
+      if (toDoListItems[i]
+        && toDoListItems[i].hasOwnProperty(attr)
+        && (arguments.length > 2 && toDoListItems[i][attr] === value)) {
+        toDoListItems.splice(i, 1);
+      }
+    }
+    return toDoListItems;
+  }
 };
 
-const clearUI = () => {
-  orderList.innerHTML = "";
+/* To clear inputs of title and description after add todo is clicked*/
+const clearTodoInput = () => {
+  for (const usrInput of userInputs) {
+    usrInput.value = '';
+  }
 };
+/*
+const closeTodoModal = () => {
+  addTodoModal.classList.remove('visible');
+}; */
 
-addBtn.onclick = () => {
-  const userData = "data by user";
-  clearUI();
-  listData.push(userData);
-  printData();
+/* to add items to array */
+const addListHandler = () => {
+  const title = userInputs[0].value;
+  const desc = userInputs[1].value;
+  if (title === '' || desc === '') {
+    alert('please enter a valid title and desc');
+  } else {
+    const newTodo = {
+      id: Math.random().toString(),
+      title: title,
+      desc: desc,
+    };
+    toDoListItems.push(newTodo);
+    clearTodoInput();
+    // closeTodoModal();
+    /* to pass array elements to list */
+    renderNewModalEl(newTodo.id, newTodo.title, newTodo.desc);
+  }
 };
-
-printData();
-
-listWrapper.append(orderList);
-app.append(listWrapper);
-app.append(addBtn);
+const addBtn = document.getElementById('addBtn');
+addBtn.addEventListener('click', addListHandler);
