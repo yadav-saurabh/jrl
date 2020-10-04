@@ -1,4 +1,7 @@
-
+/**
+ * same as sumit branch
+ * please refer branch sumit for the review 
+ */
 const addTodoModal = document.getElementById('myModal');
 const userInputs = addTodoModal.querySelectorAll('input');
 const toDoListItems = [];
